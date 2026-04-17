@@ -18,7 +18,7 @@ When you ask Claude Code to create a diagram, flowchart, mind map, or any visual
 
 ```bash
 mkdir -p ~/.claude/skills/excalidraw-diagram && curl -o ~/.claude/skills/excalidraw-diagram/SKILL.md \
-  https://raw.githubusercontent.com/secemp9/excalidraw_skill/main/SKILL.md
+  https://raw.githubusercontent.com/secemp9/excalidraw_skill/main/claude/skills/excalidraw-diagram/SKILL.md
 ```
 
 **Option 2: Clone and symlink** (easier updates via `git pull`)
@@ -26,7 +26,7 @@ mkdir -p ~/.claude/skills/excalidraw-diagram && curl -o ~/.claude/skills/excalid
 ```bash
 git clone https://github.com/secemp9/excalidraw_skill.git ~/excalidraw_skill
 mkdir -p ~/.claude/skills/excalidraw-diagram
-ln -sf ~/excalidraw_skill/SKILL.md ~/.claude/skills/excalidraw-diagram/SKILL.md
+ln -sf ~/excalidraw_skill/claude/skills/excalidraw-diagram/SKILL.md ~/.claude/skills/excalidraw-diagram/SKILL.md
 ```
 
 **Verify:** Start Claude Code and type `/excalidraw-diagram` or ask it to "create a flowchart".
@@ -102,8 +102,9 @@ The skill file (~2700 lines) is an exhaustive reference covering:
 ## Repo Structure
 
 ```
-SKILL.md                      # Claude Code skill file
-opencode/command/excalidraw.md # opencode slash command (1:1 conversion)
+claude/skills/excalidraw-diagram/SKILL.md  # Claude Code skill (mirrors ~/.claude/)
+opencode/command/excalidraw.md             # opencode slash command (mirrors ~/.config/opencode/)
+SKILL.md                                   # Standalone copy (same as claude/ version)
 ```
 
 ## Requirements
