@@ -1,6 +1,6 @@
-# Excalidraw Diagram Skill for Claude Code
+# Excalidraw Diagram Skill
 
-A comprehensive skill that enables Claude Code to generate Excalidraw diagrams as Obsidian-compatible `.md` files. The skill covers the complete Excalidraw JSON schema, all element types, styling options, layout patterns, and rendering details -- derived from exhaustive analysis of the Excalidraw source code.
+A comprehensive skill/command that enables AI coding assistants to generate Excalidraw diagrams as Obsidian-compatible `.md` files. Supports **Claude Code** (skill) and **opencode** (slash command). Covers the complete Excalidraw JSON schema, all element types, styling options, layout patterns, and rendering details -- derived from exhaustive analysis of the Excalidraw source code.
 
 ## What It Does
 
@@ -12,15 +12,16 @@ When you ask Claude Code to create a diagram, flowchart, mind map, or any visual
 
 ## Installation
 
-### Option 1: Copy the skill file directly
+### Claude Code
+
+**Option 1: One-liner**
 
 ```bash
-mkdir -p ~/.claude/skills/excalidraw-diagram
-curl -o ~/.claude/skills/excalidraw-diagram/SKILL.md \
+mkdir -p ~/.claude/skills/excalidraw-diagram && curl -o ~/.claude/skills/excalidraw-diagram/SKILL.md \
   https://raw.githubusercontent.com/secemp9/excalidraw_skill/main/SKILL.md
 ```
 
-### Option 2: Clone and symlink
+**Option 2: Clone and symlink** (easier updates via `git pull`)
 
 ```bash
 git clone https://github.com/secemp9/excalidraw_skill.git ~/excalidraw_skill
@@ -28,30 +29,45 @@ mkdir -p ~/.claude/skills/excalidraw-diagram
 ln -sf ~/excalidraw_skill/SKILL.md ~/.claude/skills/excalidraw-diagram/SKILL.md
 ```
 
-This way you can `git pull` to get updates.
+**Verify:** Start Claude Code and type `/excalidraw-diagram` or ask it to "create a flowchart".
 
-### Option 3: Manual install
+### opencode
 
-1. Download `SKILL.md` from this repo
-2. Place it at `~/.claude/skills/excalidraw-diagram/SKILL.md`
+**Option 1: One-liner**
 
-### Verify installation
+```bash
+curl -o ~/.config/opencode/command/excalidraw.md \
+  https://raw.githubusercontent.com/secemp9/excalidraw_skill/main/opencode/command/excalidraw.md
+```
 
-Start Claude Code and type `/excalidraw-diagram` or ask it to "create a flowchart". If the skill is loaded, Claude will generate an `.md` file with full Excalidraw JSON.
+**Option 2: Clone and symlink** (easier updates via `git pull`)
+
+```bash
+git clone https://github.com/secemp9/excalidraw_skill.git ~/excalidraw_skill
+ln -sf ~/excalidraw_skill/opencode/command/excalidraw.md ~/.config/opencode/command/excalidraw.md
+```
+
+**Verify:** Start opencode and type `/excalidraw create a flowchart`.
 
 ## Usage
 
-Just ask Claude Code to create any kind of diagram:
+Just ask your AI assistant to create any kind of diagram:
 
+**Claude Code** -- just describe what you want naturally:
 ```
 > create a flowchart of user authentication flow
 > visualize the microservice architecture
 > draw an ER diagram for the users database
-> mind map the project requirements
-> chart the quarterly revenue data as a bar chart
 ```
 
-Claude will:
+**opencode** -- use the `/excalidraw` slash command:
+```
+/excalidraw flowchart of user authentication flow
+/excalidraw mind map the project requirements
+/excalidraw bar chart of quarterly revenue
+```
+
+The assistant will:
 1. Analyze your content and choose the best diagram type
 2. Generate the complete Excalidraw JSON with all elements, arrows, and text
 3. Save an Obsidian-compatible `.md` file to your current directory
@@ -83,9 +99,16 @@ The skill file (~2700 lines) is an exhaustive reference covering:
 - **Quick start example** -- a complete copy-paste-ready diagram
 - **Troubleshooting guide** for 7 common rendering issues
 
+## Repo Structure
+
+```
+SKILL.md                      # Claude Code skill file
+opencode/command/excalidraw.md # opencode slash command (1:1 conversion)
+```
+
 ## Requirements
 
-- [Claude Code](https://claude.ai/code) (CLI, desktop app, or IDE extension)
+- [Claude Code](https://claude.ai/code) or [opencode](https://github.com/opencode-ai/opencode)
 - [Obsidian](https://obsidian.md/) with the [Excalidraw plugin](https://github.com/zsviczian/obsidian-excalidraw-plugin) installed (for viewing diagrams)
 
 ## License
